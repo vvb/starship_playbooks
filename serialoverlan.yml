@@ -1,0 +1,19 @@
+---
+# This role contains task for configuring sol properties 
+- hosts: localhost 
+  connection: local
+  gather_facts: no
+  tasks:
+   - name: set sol properties 
+     cisco_imc_sol:
+       speed: "{{ speed }}" 
+       comport: "{{ comport }}"
+       ssh_port: "{{ ssh_port }}"
+       state: "{{ state }}" 
+       starship_options: "{{ starship_options }}"
+     register: sol_output
+     ignore_errors: yes   
+
+   - set_stats:
+      data:
+        Result: {Message: "{{ sol_output['msg'] }}", State: "{{ sol_output['status'] }}", Type: "config"}  
