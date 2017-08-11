@@ -1,0 +1,16 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: set boot order
+      cisco_imc_boot_order_precision:
+        boot_devices: "{{ boot_devices }}"
+        starship_options: "{{ starship_options }}"
+      register: boot_output
+      ignore_errors: yes
+
+    - set_stats:
+        data:
+          Result: {Message: "{{ boot_output['msg'] }}", State: "{{ boot_output['status'] }}", Type: "config"}
