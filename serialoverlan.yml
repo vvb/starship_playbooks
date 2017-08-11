@@ -10,7 +10,7 @@
        comport: "{{ comport }}"
        ssh_port: "{{ ssh_port }}"
        state: "{{ state }}" 
-       starship_options: "{{starship_options}}"
+       starship_options: "{{ starship_options }}"
      register: sol_output
      ignore_errors: yes   
 
